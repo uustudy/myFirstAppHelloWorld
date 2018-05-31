@@ -1,0 +1,74 @@
+<style>
+    .main-wrap ul {
+    width: 100%;
+    display: inline-block;
+    padding-top: 20px;
+    }
+    .main-wrap ul li {
+    float: left;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    background-color: #00D000;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    }
+    .main-wrap ul li:active {
+    opacity: 0.8;
+    }
+</style>
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<div class="main-wrap">
+    <ul class="postAndroid">
+        <li onclick="jsCallAndroid('1')">不传参数调用原生控件</li>
+        <li onclick="jsCallAndroid('2')">传参数调用原生控件</li>
+        <li onclick="jsCallAndroid('3')">以JSON格式传参数调用原生控件</li>
+        <li onclick="jsCallAndroid('4')">调用打电话服务</li>
+    </ul>
+
+    <a data-role="button" >跳转到activity</a>
+    <input  id="b" type="button" value="跳转" onclick="testClick()"/>
+    用户名:<input type="text" id="text1" placeholder="输入内容" />
+    密 码:<input type="text" id="text2" placeholder="输入内容" />
+</div>
+<script>
+$(function(){
+    //$("#b").click(function() {
+            //alert(1111);
+     //       android.method($("#text1").val(),$("#text2").val());
+     //   });
+})
+
+function testClick(){
+     android.mymethod($("#text1").val(),$("#text2").val());
+}
+
+ function jsCallAndroid(rel) {
+     switch(rel){
+      case "1":
+        android.callNull();
+        break;
+      case "2":
+        android.callMessage("javaScript操作Android原生");
+        break;
+      case "3":
+        var json = "[{\"name\":\"满艺网\", \"phone\":\"4008366069\"}]";
+        android.callJson(json);
+        break;
+      case "4":
+        android.callPhone("4008366069");
+        break;
+     }
+ }
+
+ function showNoMessage() {
+    alert("Android无参调用");
+ }
+
+ function showMessage(data) {
+    alert("Android有参调用-data:" + data);
+ }
+</script>
